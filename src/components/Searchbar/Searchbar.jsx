@@ -1,14 +1,15 @@
 import css from './Searchbar.module.css'
 
-export const Searchbar = () => {
+export const Searchbar = () => (
+
 	<header className={css.Searchbar}>
-		<form className={css.form}>
-			<button type="submit" className={css.button}>
-				<span className={css.button__label}>Search</span>
+		<form className={css.SearchForm}>
+			<button type="submit" className={css.SearchForm__button}>
+				<span className={css.SearchForm__button__label}>Search</span>
 			</button>
 
 			<input
-				className={css.input}
+				className={css.SearchForm__input}
 				type="text"
 				autocomplete="off"
 				autofocus
@@ -16,4 +17,5 @@ export const Searchbar = () => {
 			/>
 		</form>
 	</header>
-}
+
+)

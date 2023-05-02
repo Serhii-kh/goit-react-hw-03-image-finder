@@ -1,9 +1,12 @@
 import { Component } from "react";
 import { Searchbar } from "./Searchbar/Searchbar";
-// import { ImageGallery } from "./ImageGallery/ImageGallery";
+import { ImageGallery } from "./ImageGallery/ImageGallery";
 // import { Modal } from "./Modal/Modal";
 // import css from './App.module.css'
-import axios from "axios"
+// import axios from "axios"
+import { fetchImages } from "Api/fetchImages";
+// import { ImageGalleryItem } from "./ImageGalleryItem/ImageGalleryItem";
+import css from './App.module.css'
 
 
 
@@ -14,43 +17,37 @@ import axios from "axios"
 
 export class App extends Component {
 	state = {
-		images: [],
+		images: null,
 		searchQuery: '',
 		page: 1,
 		error: null,
 	}
 
 	async componentDidMount() {
-		const BASE_URL = 'https://pixabay.com/api/';
-		const API_KEY = '34855628-78991e6cca5fe0310616aeb58';
-		const BASE_FETCH_OPTIONS =
-			'image_type=photo&orientation=horizontal&safesearch=true&per_page=4';
-		const instance = axios.create({
-			baseURL: BASE_URL,
-		});
 
 
 		try {
-			const response = await instance.get(
-				`?key=${API_KEY}&q=cat&${BASE_FETCH_OPTIONS}&page=1`
-			)
-			const images = response.data.hits;
-			console.log(images)
-			this.setState({ images: images })
-			return images
+			await fetchImages().then(images => this.setState({ images }))
+
+		} catch (error) {
+			this.setState({ error })
 		}
-		catch (error) { this.setState({ error }) }
-
-
 
 	}
 
-	render() {
-		return (
-			<>
-				<Searchbar />
 
-			</>
+
+
+
+	render() {
+		const { images } = this.state
+
+		return (
+			<div className={css.App}>
+				<Searchbar />
+				{images && <ImageGallery images={images} />}
+			</div>
+
 		)
 	}
 };
