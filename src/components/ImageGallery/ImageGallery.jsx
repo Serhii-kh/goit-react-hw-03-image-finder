@@ -23,6 +23,10 @@ export class ImageGallery extends Component {
 		const nextSearchQuery = this.props.searchQuery
 
 		if (prevSearchQuery !== nextSearchQuery) {
+			this.setState({
+				images: [],
+			})
+
 			try { fetchImages(nextSearchQuery).then(images => this.setState({ images })) }
 			catch (error) { this.setState({ error }) }
 		}
@@ -32,11 +36,15 @@ export class ImageGallery extends Component {
 		const { images } = this.state
 
 		return (
-			<ul className={css.ImageGallery} >
-				{images.map(({ tags, webformatURL, id }) => (
-					<ImageGalleryItem key={id} src={webformatURL} alt={tags} />)
-				)}
-			</ul >
+			<>
+				
+				<ul className={css.ImageGallery} >
+					{images.map(({ tags, webformatURL, id }) => (
+						<ImageGalleryItem key={id} src={webformatURL} alt={tags} />)
+					)}
+				</ul >
+				<button type='button' className={css.Button}>Load more</button>
+			</>
 		)
 	}
 }

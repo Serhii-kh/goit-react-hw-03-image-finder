@@ -5,7 +5,7 @@ export const fetchImages = async searchQuery => {
   const BASE_URL = 'https://pixabay.com/api/';
   const API_KEY = '34855628-78991e6cca5fe0310616aeb58';
   const BASE_FETCH_OPTIONS =
-    'image_type=photo&orientation=horizontal&safesearch=true&per_page=4';
+    'image_type=photo&orientation=horizontal&safesearch=true&per_page=3';
   const instance = axios.create({
     baseURL: BASE_URL,
   });
@@ -16,7 +16,6 @@ export const fetchImages = async searchQuery => {
     );
     const images = response.data.hits;
 
-    console.log(images);
     return images;
   } catch (error) {
     this.setState({ error });
