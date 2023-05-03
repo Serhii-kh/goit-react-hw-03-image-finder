@@ -9,16 +9,13 @@ export class ImageGallery extends Component {
 
 	state = {
 		searchQuery: '',
-		images: [],
+		images: null,
 		error: null,
+		status: 'idle',
 	}
 
-	// componentDidMount() {
-	// 	try { fetchImages(this.state.searchQuery).then(images => this.setState({ images })) }
-	// 	catch (error) { this.setState({ error }) }
-	// }
 
-	componentDidUpdate(prevProps, prevState) {
+	async componentDidUpdate(prevProps, prevState) {
 		const prevSearchQuery = prevProps.searchQuery
 		const nextSearchQuery = this.props.searchQuery
 
@@ -27,7 +24,7 @@ export class ImageGallery extends Component {
 				images: [],
 			})
 
-			try { fetchImages(nextSearchQuery).then(images => this.setState({ images })) }
+			try { await fetchImages(nextSearchQuery).then(images => this.setState({ images })) }
 			catch (error) { this.setState({ error }) }
 		}
 	}
@@ -36,16 +33,18 @@ export class ImageGallery extends Component {
 		const { images } = this.state
 
 		return (
-			<>
-				
-				<ul className={css.ImageGallery} >
-					{images.map(({ tags, webformatURL, id }) => (
-						<ImageGalleryItem key={id} src={webformatURL} alt={tags} />)
-					)}
-				</ul >
-				<button type='button' className={css.Button}>Load more</button>
-			</>
-		)
+			<div>
+				{images &&
+					<>
+						<ul className={css.ImageGallery} >
+							{images.map(({ tags, webformatURL, id }) => (
+								<ImageGalleryItem key={id} src={webformatURL} alt={tags} />)
+							)}
+						</ul >
+						<button type='button' className={css.Button}>Load more</button>
+					</>
+				}
+			</div>)
 	}
 }
 

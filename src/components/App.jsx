@@ -32,7 +32,7 @@ export class App extends Component {
 		return (
 			<div className={css.App}>
 				<Searchbar onSubmit={this.onFormSubmit} />
-				{<ImageGallery searchQuery={searchQuery} />}
+				<ImageGallery searchQuery={searchQuery} />
 			</div>
 
 		)
