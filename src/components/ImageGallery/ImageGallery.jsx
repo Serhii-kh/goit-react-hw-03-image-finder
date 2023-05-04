@@ -46,12 +46,11 @@ export class ImageGallery extends Component {
 		}
 	};
 
-
-	resetPage = () => {
-		this.setState({
-			page: 1,
-		});
-	};
+	// resetPage = () => {
+	// 	this.setState({
+	// 		page: 1,
+	// 	});
+	// };
 
 	render() {
 		const { images } = this.state;
