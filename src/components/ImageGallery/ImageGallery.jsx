@@ -17,9 +17,8 @@ export class ImageGallery extends Component {
 
 		if (prevSearchQuery !== nextSearchQuery) {
 			this.setState({
-				// images: [],
 				page: 1,
-			});
+			})
 
 			try {
 				fetchImages(nextSearchQuery, this.state.page).then(images =>
@@ -48,11 +47,11 @@ export class ImageGallery extends Component {
 	};
 
 
-	// clearSate = () => {
-	// 	this.setState({
-	// 		page: 1,
-	// 	});
-	// };
+	resetPage = () => {
+		this.setState({
+			page: 1,
+		});
+	};
 
 	render() {
 		const { images } = this.state;
