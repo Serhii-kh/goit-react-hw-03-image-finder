@@ -13,8 +13,6 @@ import css from './App.module.css';
 export class App extends Component {
   state = {
     searchQuery: '',
-    // page: 1,
-    // error: null,
   };
 
   onFormSubmit = searchQuery => {

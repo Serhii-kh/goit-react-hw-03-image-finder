@@ -1,7 +1,7 @@
 // import { Component } from 'react';
 import axios from 'axios';
 
-export const fetchImages = async searchQuery => {
+export const fetchImages = async (searchQuery, page) => {
   const BASE_URL = 'https://pixabay.com/api/';
   const API_KEY = '34855628-78991e6cca5fe0310616aeb58';
   const BASE_FETCH_OPTIONS =
@@ -12,7 +12,7 @@ export const fetchImages = async searchQuery => {
 
   try {
     const response = await instance.get(
-      `?key=${API_KEY}&q=${searchQuery}&${BASE_FETCH_OPTIONS}&page=1`
+      `?key=${API_KEY}&q=${searchQuery}&${BASE_FETCH_OPTIONS}&page=${page}`
     );
     const images = response.data.hits;
 
