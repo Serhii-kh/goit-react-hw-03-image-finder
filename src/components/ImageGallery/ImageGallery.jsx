@@ -2,12 +2,14 @@ import { Component } from 'react';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { fetchImages } from 'Api/fetchImages';
 import css from './ImageGallery.module.css';
+import { Modal } from 'components/Modal/Modal';
 
 export class ImageGallery extends Component {
 	state = {
 		images: null,
 		page: null,
 		error: null,
+		showModal: false,
 		// status: 'idle',
 	};
 
@@ -52,6 +54,12 @@ export class ImageGallery extends Component {
 	// 	});
 	// };
 
+	toggleModal = () => {
+		this.setState(({ showModal }) => ({
+			showModal: !showModal,
+		}))
+	}
+
 	render() {
 		const { images } = this.state;
 
@@ -71,6 +79,11 @@ export class ImageGallery extends Component {
 						>
 							Load more
 						</button>
+						<button type='button'
+							onClick={this.toggleModal}>
+							open modal
+						</button>
+						
 					</>
 				)}
 			</div>
