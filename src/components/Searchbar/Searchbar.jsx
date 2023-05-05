@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Button } from 'components/Button/Button';
 import css from './Searchbar.module.css';
 
 export class Searchbar extends Component {
@@ -31,9 +32,9 @@ export class Searchbar extends Component {
     return (
       <header className={css.Searchbar}>
         <form className={css.SearchForm} onSubmit={this.handleSubmit}>
-          <button type="submit" className={css.SearchForm__button}>
+          <Button type="submit">
             <span className={css.SearchForm__button__label}>Search</span>
-          </button>
+          </Button>
 
           <input
             className={css.SearchForm__input}

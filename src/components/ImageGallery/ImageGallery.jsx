@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { fetchImages } from 'Api/fetchImages';
+import { Button } from 'components/Button/Button';
 import css from './ImageGallery.module.css';
 export class ImageGallery extends Component {
 	state = {
@@ -58,12 +59,11 @@ export class ImageGallery extends Component {
 								/>
 							))}
 						</ul>
-						<button
+						<Button
 							type="button"
-							className={css.Button}
 							onClick={this.handleLoadMoreBtnClick}>
 							Load more
-						</button>
+						</Button>
 					</>
 				)}
 			</div>
