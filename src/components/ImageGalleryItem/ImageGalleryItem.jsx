@@ -8,15 +8,12 @@ export class ImageGalleryItem extends Component {
 		showModal: false,
 	}
 
-	// onClose = () => {
-
-	// }
-
 	toggleModal = () => {
 		this.setState(({ showModal }) => ({
 			showModal: !showModal,
 		}))
 	}
+
 
 	render() {
 		const { showModal } = this.state
