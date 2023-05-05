@@ -4,19 +4,18 @@ import css from './Modal.module.css'
 export class Modal extends Component {
 	state = {}
 
-
-	onEscapeKeyPress = e => {
-		if (e.code === 'Escape') {
-			this.props.onClose()
-		}
-	}
-
 	componentDidMount() {
 		window.addEventListener('keydown', this.onEscapeKeyPress)
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener('keydown', this.onEscapeKeyPress);
+	}
+
+	onEscapeKeyPress = e => {
+		if (e.code === 'Escape') {
+			this.props.onClose()
+		}
 	}
 
 	HandleOverlayClose = e => {
