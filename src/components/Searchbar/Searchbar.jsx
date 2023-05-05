@@ -1,5 +1,4 @@
 import { Component } from 'react';
-// import { fetchImages } from 'Api/fetchImages';
 import css from './Searchbar.module.css';
 
 export class Searchbar extends Component {
@@ -8,10 +7,10 @@ export class Searchbar extends Component {
   };
 
   handleChange = e => {
-    const { value } = e.currentTarget;
+    const { value, name } = e.currentTarget;
 
     this.setState({
-      searchQuery: value,
+      [name]: value,
     });
   };
 
@@ -25,7 +24,6 @@ export class Searchbar extends Component {
     }
 
     this.props.onSubmit(searchQuery);
-    // this.reset();
   };
 
   render() {
@@ -44,7 +42,8 @@ export class Searchbar extends Component {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+						placeholder="Search images and photos"
+						name="searchQuery"
           />
         </form>
       </header>
