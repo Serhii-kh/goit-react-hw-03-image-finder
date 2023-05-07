@@ -2,16 +2,17 @@ import { Component } from 'react';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { fetchImages } from 'Api/fetchImages';
 import { Button } from 'components/Button/Button';
+import { Loader } from 'components/Loader/Loader';
 import css from './ImageGallery.module.css';
 export class ImageGallery extends Component {
 	state = {
-		images: null,
+		images: [],
 		page: null,
 		error: null,
-
+		loading: false,
 	};
 
-	componentDidUpdate(prevProps) {
+	async componentDidUpdate(prevProps) {
 		const prevSearchQuery = prevProps.searchQuery;
 		const nextSearchQuery = this.props.searchQuery;
 
@@ -26,14 +27,21 @@ export class ImageGallery extends Component {
 						images,
 						page: (prevState.page + 1),
 					}))
+
 				);
+
 			} catch (error) {
 				this.setState({ error });
 			}
 		}
+
 	}
 
 	handleLoadMoreBtnClick = () => {
+		this.setState({
+			loading: true,
+		})
+
 		try {
 			fetchImages(this.props.searchQuery, this.state.page).then(images =>
 				this.setState(prevState => ({
@@ -43,15 +51,21 @@ export class ImageGallery extends Component {
 			);
 		} catch (error) {
 			this.setState({ error });
+		} finally {
+			this.setState({
+				loading: false,
+			})
 		}
 	};
 
 	render() {
-		const { images } = this.state;
+		const { images, loading } = this.state;
+		const imagesLength = this.state.images.length;
 
 		return (
 			<div>
-				{images && (
+				{loading && <Loader />}
+				{imagesLength > 0 && (
 					<>
 						<ul className={css.ImageGallery}>
 							{images.map((image) => (
@@ -59,6 +73,7 @@ export class ImageGallery extends Component {
 								/>
 							))}
 						</ul>
+
 						<Button
 							type="button"
 							onClick={this.handleLoadMoreBtnClick}>

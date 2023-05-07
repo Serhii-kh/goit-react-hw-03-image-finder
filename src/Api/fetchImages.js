@@ -14,7 +14,8 @@ export const fetchImages = async (searchQuery, page) => {
     const response = await instance.get(
       `?key=${API_KEY}&q=${searchQuery}&${BASE_FETCH_OPTIONS}&page=${page}`
     );
-    const images = response.data.hits;
+		const images = response.data.hits;
+		console.log(images)
 
     return images;
   } catch (error) {
