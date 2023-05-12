@@ -84,3 +84,10 @@
   font: inherit;
   font-size: inherit;
 }
+
+
+.Searchbar {
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}

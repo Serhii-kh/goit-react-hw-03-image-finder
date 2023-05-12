@@ -1,9 +1,8 @@
 import { Component } from 'react'
-import css from './ImageGalleryItem.module.css'
 import { Modal } from 'components/Modal/Modal'
+import css from './ImageGalleryItem.module.css'
 
 export class ImageGalleryItem extends Component {
-
 	state = {
 		showModal: false,
 	}
@@ -14,12 +13,10 @@ export class ImageGalleryItem extends Component {
 		}))
 	}
 
-
 	render() {
 		const { showModal } = this.state
 		const { image } = this.props
 		const { tags, webformatURL, largeImageURL } = image
-
 
 		return (
 			<>

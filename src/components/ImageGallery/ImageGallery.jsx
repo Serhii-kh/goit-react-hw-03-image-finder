@@ -63,7 +63,7 @@ export class ImageGallery extends Component {
 		const imagesLength = this.state.images.length;
 
 		return (
-			<div>
+			<div className={css.listWrapper}>
 				{loading && <Loader />}
 				{imagesLength > 0 && (
 					<>
@@ -76,6 +76,7 @@ export class ImageGallery extends Component {
 
 						<Button
 							type="button"
+							className={css.loadMoreBtn}
 							onClick={this.handleLoadMoreBtnClick}>
 							Load more
 						</Button>
