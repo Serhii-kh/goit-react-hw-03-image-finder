@@ -8,18 +8,18 @@ export class App extends Component {
 		searchQuery: '',
 	};
 
-	onSubmit = searchQuery => {
+	onSubmit = (searchQuery) => {
 		this.setState({
 			searchQuery,
 		});
 	};
 
 	render() {
-		const { searchQuery} = this.state;
+		const { searchQuery } = this.state;
 
 		return (
 			<div className={css.App}>
-				<Searchbar onSubmit={this.onSubmit} />
+				<Searchbar handleSubmit={this.onSubmit} />
 				<ImageGallery searchQuery={searchQuery} />
 			</div>
 		);

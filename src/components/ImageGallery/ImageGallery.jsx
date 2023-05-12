@@ -4,6 +4,7 @@ import { fetchImages } from 'Api/fetchImages';
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
 import css from './ImageGallery.module.css';
+
 export class ImageGallery extends Component {
 	state = {
 		images: [],
@@ -12,7 +13,8 @@ export class ImageGallery extends Component {
 		loading: false,
 	};
 
-	async componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps) {
+		const { page } = this.state;
 		const prevSearchQuery = prevProps.searchQuery;
 		const nextSearchQuery = this.props.searchQuery;
 
@@ -22,19 +24,16 @@ export class ImageGallery extends Component {
 			})
 
 			try {
-				fetchImages(nextSearchQuery, this.state.page).then(images =>
+				fetchImages(nextSearchQuery, page).then(images =>
 					this.setState(prevState => ({
 						images,
 						page: (prevState.page + 1),
 					}))
-
 				);
-
 			} catch (error) {
 				this.setState({ error });
 			}
 		}
-
 	}
 
 	handleLoadMoreBtnClick = () => {
@@ -76,7 +75,6 @@ export class ImageGallery extends Component {
 
 						<Button
 							type="button"
-							className={css.loadMoreBtn}
 							onClick={this.handleLoadMoreBtnClick}>
 							Load more
 						</Button>
