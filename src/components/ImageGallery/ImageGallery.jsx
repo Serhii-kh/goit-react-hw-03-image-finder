@@ -92,4 +92,5 @@ ImageGallery.propTypes = {
 	loading: PropTypes.bool.isRequired,
 	image: PropTypes.object.isRequired,
 	onClick: PropTypes.func.isRequired,
+	fetchImages: PropTypes.node.isRequired,
 }
