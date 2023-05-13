@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import css from './Modal.module.css'
+import PropTypes from 'prop-types'
 
 export class Modal extends Component {
 	
@@ -34,4 +35,10 @@ export class Modal extends Component {
 
 	}
 
+}
+
+
+Modal.propTypes = {
+	onClick: PropTypes.func.isRequired,
+	onClose: PropTypes.func.isRequired,
 }

@@ -4,6 +4,7 @@ import { fetchImages } from 'Api/fetchImages';
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
 import css from './ImageGallery.module.css';
+import PropTypes from 'prop-types'
 
 export class ImageGallery extends Component {
 	state = {
@@ -83,4 +84,12 @@ export class ImageGallery extends Component {
 			</div>
 		);
 	}
+}
+
+
+ImageGallery.propTypes = {
+	images: PropTypes.array,
+	loading: PropTypes.bool.isRequired,
+	image: PropTypes.object.isRequired,
+	onClick: PropTypes.func.isRequired,
 }
