@@ -95,8 +95,8 @@ export class ImageGallery extends Component {
 
 ImageGallery.propTypes = {
 	images: PropTypes.array,
-	loading: PropTypes.bool.isRequired,
-	image: PropTypes.object.isRequired,
-	onClick: PropTypes.func.isRequired,
-	fetchImages: PropTypes.node.isRequired,
+	loading: PropTypes.bool,
+	image: PropTypes.object,
+	onClick: PropTypes.func,
+	fetchImages: PropTypes.func,
 }

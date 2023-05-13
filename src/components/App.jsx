@@ -30,6 +30,6 @@ export class App extends Component {
 
 
 App.propTypes = {
-	handleSubmit: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func,
 	searchQuery: PropTypes.string,
 }
