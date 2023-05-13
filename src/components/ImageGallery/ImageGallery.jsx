@@ -22,6 +22,7 @@ export class ImageGallery extends Component {
 		if (prevSearchQuery !== nextSearchQuery) {
 			this.setState({
 				page: 1,
+				loading: true,
 			})
 
 			try {
@@ -32,7 +33,12 @@ export class ImageGallery extends Component {
 					}))
 				);
 			} catch (error) {
-				this.setState({ error });
+				this.setState({ error })
+			}
+			finally {
+				this.setState({
+					loading: false,
+				})
 			}
 		}
 	}
