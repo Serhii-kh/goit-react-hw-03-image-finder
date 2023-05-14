@@ -27,20 +27,18 @@ export class ImageGallery extends Component {
 			})
 
 			try {
-				fetchImages(nextSearchQuery, page).then(responseData =>
+				fetchImages(nextSearchQuery, page).then(({ hits, totalHits }) =>
 					this.setState({
-						images: responseData.hits,
-						hits: responseData.hits.length,
-						totalHits: responseData.totalHits,
+						images: hits,
+						hits: hits.length,
+						totalHits,
 					})
 				);
-
+				page += 1;
 			} catch (error) {
 				this.setState({ error })
 			}
 			finally {
-				page += 1;
-
 				this.setState({
 					loading: false,
 				})
@@ -54,16 +52,16 @@ export class ImageGallery extends Component {
 		})
 
 		try {
-			fetchImages(this.props.searchQuery, page).then(responseData =>
-				this.setState(prevState => ({
-					images: [...prevState.images, ...responseData.hits],
-					hits: prevState.hits + responseData.hits.length,
+			fetchImages(this.props.searchQuery, page).then(({ hits }) =>
+				this.setState(state => ({
+					images: [...state.images, ...hits],
+					hits: (state.hits + hits.length),
 				}))
 			);
+			page += 1;
 		} catch (error) {
 
 		} finally {
-			page += 1;
 			this.setState({
 				loading: false,
 			})
