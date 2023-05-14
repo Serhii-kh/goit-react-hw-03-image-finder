@@ -1,4 +1,3 @@
-// import { Component } from 'react';
 import axios from 'axios';
 
 export const fetchImages = async (searchQuery, page) => {
@@ -14,13 +13,13 @@ export const fetchImages = async (searchQuery, page) => {
     const response = await instance.get(
       `?key=${API_KEY}&q=${searchQuery}&${BASE_FETCH_OPTIONS}&page=${page}`
     );
-    const images = response.data.hits;
+    const responseData = response.data;
 
-    if (images.length === 0) {
+    if (responseData.hits.length === 0) {
       alert('Please enter a valid search query');
     }
-
-    return images;
+    console.log(responseData);
+    return responseData;
   } catch (error) {
     console.log(error);
   }

@@ -6,36 +6,41 @@ import { Loader } from 'components/Loader/Loader';
 import css from './ImageGallery.module.css';
 import PropTypes from 'prop-types'
 
+let page = 1;
 export class ImageGallery extends Component {
 	state = {
 		images: [],
-		page: null,
 		error: null,
 		loading: false,
+		totalHits: 0,
+		hits: 0,
 	};
 
 	componentDidUpdate(prevProps) {
-		const { page } = this.state;
 		const prevSearchQuery = prevProps.searchQuery;
 		const nextSearchQuery = this.props.searchQuery;
 
 		if (prevSearchQuery !== nextSearchQuery) {
+			page = 1;
 			this.setState({
-				page: 1,
 				loading: true,
 			})
 
 			try {
-				fetchImages(nextSearchQuery, page).then(images =>
-					this.setState(prevState => ({
-						images,
-						page: (prevState.page + 1),
-					}))
+				fetchImages(nextSearchQuery, page).then(responseData =>
+					this.setState({
+						images: responseData.hits,
+						hits: responseData.hits.length,
+						totalHits: responseData.totalHits,
+					})
 				);
+
 			} catch (error) {
 				this.setState({ error })
 			}
 			finally {
+				page += 1;
+
 				this.setState({
 					loading: false,
 				})
@@ -49,15 +54,16 @@ export class ImageGallery extends Component {
 		})
 
 		try {
-			fetchImages(this.props.searchQuery, this.state.page).then(images =>
+			fetchImages(this.props.searchQuery, page).then(responseData =>
 				this.setState(prevState => ({
-					images: [...prevState.images, ...images],
-					page: (prevState.page + 1),
+					images: [...prevState.images, ...responseData.hits],
+					hits: prevState.hits + responseData.hits.length,
 				}))
 			);
 		} catch (error) {
-			this.setState({ error });
+
 		} finally {
+			page += 1;
 			this.setState({
 				loading: false,
 			})
@@ -65,7 +71,7 @@ export class ImageGallery extends Component {
 	};
 
 	render() {
-		const { images, loading } = this.state;
+		const { images, loading, hits, totalHits } = this.state;
 		const imagesLength = this.state.images.length;
 
 		return (
@@ -80,11 +86,11 @@ export class ImageGallery extends Component {
 							))}
 						</ul>
 
-						<Button
+						{hits < totalHits && <Button
 							type="button"
 							onClick={this.handleLoadMoreBtnClick}>
 							Load more
-						</Button>
+						</Button>}
 					</>
 				)}
 			</div>
